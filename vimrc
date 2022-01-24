@@ -12,7 +12,11 @@ set nowb
 set noswapfile
 
 
-let g:airline_theme = "tokyonight"
+
+let g:airline_theme = "deus"
+
+
+"let g:airline_theme = "tokyonight"
 
 
 "Caps lock as esc
@@ -33,6 +37,9 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'fatih/vim-go'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'ryanoasis/vim-devicons'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+
 
 
 " Common Go commands
@@ -47,6 +54,12 @@ au FileType go nmap <Leader>i <Plug>(go-info)
 "To run by f9
 autocmd FileType go map <buffer> <F9> :w<CR>:exec '!go run' shellescape(@%, 1)<CR>
 autocmd FileType go imap <buffer> <F9> <esc>:w<CR>:exec '!go run' shellescape(@%, 1)<CR>
+autocmd filetype c nnoremap <F9> :w <bar> exec '!gcc '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype cpp nnoremap <F9> :w <bar> exec '!g++ '.shellescape('%').' -o '.shellescape('%:r').' && ./'.shellescape('%:r')<CR>
+autocmd filetype python nnoremap <F9> :w <bar> exec '!python '.shellescape('%')<CR>
+
+
+
 
 "Terminal
 let g:floaterm_keymap_toggle = '<F7>'
@@ -88,6 +101,7 @@ Plug 'ghifarit53/tokyonight-vim'
 Plug 'jaredgorski/spacecamp'
 Plug 'mhinz/vim-startify'
 Plug 'bagrat/vim-buffet'
+Plug 'xavierd/clang_complete'
 
 
 
@@ -149,3 +163,40 @@ colorscheme spacecamp_lite
 
 
 
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+
+
+
+
+
+
+" Enable highlighting of C++11 attributes
+let g:cpp_attributes_highlight = 1
+
+" Highlight struct/class member variables (affects both C and C++ files)
+let g:cpp_member_highlight = 1
+
+" Put all standard C and C++ keywords under Vim's highlight group 'Statement'
+" (affects both C and C++ files)
+let g:cpp_simple_highlight = 1
+
+
+
+
+
+
+
+
+" path to directory where library can be found
+let g:clang_library_path='/usr/lib/llvm-11/lib'
