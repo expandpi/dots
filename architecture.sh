@@ -1,5 +1,6 @@
 echo "installing wayland and other packages for it with some additional packages "
-sudo pacman -Syy alacritty xorg-xwayland xorg-xlsclients qt5-wayland glfw-wayland
+sudo pacman -Syy alacritty xorg-xwayland xorg-xlsclients qt5-wayland glfw-wayland xdg-user-dirs tumbler mpv
+
 
 ##################################################
 
@@ -23,6 +24,7 @@ cd dotfiles
 cp -r config/bspwm ~/.config/bspwm
 
 # Move Fonts and the other stuff
+xdg-user-dirs-update
 mkdir -p ~/.local/share/fonts/
 cp -r misc/fonts/* ~/.local/share/fonts/
 cp -r misc/bin ~/.local/
@@ -80,4 +82,33 @@ pip3 install --user uploadserver
 ##################################################################
 ##################################################################
 ##################################################################
+##################################################################
+##################################################################
+##################################################################
+##################################################################
 
+
+
+yay -S sddm-theme-astronaut
+cd /etc && sudo mkdir -p sddm.conf.d && cd sddm.conf.d
+
+touch kde_settings.conf
+
+cat << EOF > kde_settings.conf
+[Autologin]
+Relogin=false
+Session=awesome
+
+[General]
+HaltCommand=/usr/bin/systemctl poweroff
+RebootCommand=/usr/bin/systemctl reboot
+
+[Theme]
+Current=astronaut
+
+[Users]
+MaximumUid=60000
+MinimumUid=1000
+EOF
+
+sudo reboot now
